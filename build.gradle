@@ -1,0 +1,72 @@
+group 'com.gusb.hell'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin: 'org.sonarqube'
+apply plugin: "info.solidsoft.pitest"
+apply plugin: 'jacoco'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy-all:2.4.4'
+
+    testCompile 'junit:junit:4.11',
+            'org.mockito:mockito-core:1.9.5',
+            'org.assertj:assertj-core:1.6.1'
+}
+
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+    dependencies {
+        classpath "org.sonarqube.gradle:gradle-sonarqube-plugin:1.0",
+                "info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.1.6"
+    }
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/java'
+        }
+        groovy {
+            srcDir 'src/groovy'
+        }
+    }
+    test {
+        java {
+            srcDir 'src/java'
+        }
+        groovy {
+            srcDir 'src/groovy'
+        }
+    }
+}
+
+sonarqube {
+    properties {
+        property "sonar.host.url", sonarHostUrl
+        property "sonar.jdbc.url", sonarJdbcUrl
+        property "sonar.jdbc.driverClassName", driverClassName
+        property "sonar.jdbc.username", sonarJdbcUsername
+        property "sonar.jdbc.password", sonarJdbcPassword
+        property "sonar.login", sonarLogin
+        property "sonar.password", sonarPassword
+        property "sonar.pitest.reportsDirectory", pitestReportsDirectory
+        property "sonar.pitest.mode", pitestMode
+    }
+}
+
+pitest {
+    targetClasses = ['com.gusb.hell.*']
+    pitestVersion = "1.1.6"
+    threads = 4
+    outputFormats = ['XML', 'HTML']
+}
