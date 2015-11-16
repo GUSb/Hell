@@ -6,6 +6,7 @@ apply plugin: 'groovy'
 apply plugin: 'org.sonarqube'
 apply plugin: "info.solidsoft.pitest"
 apply plugin: 'jacoco'
+apply plugin: 'idea'
 
 repositories {
     mavenCentral()
