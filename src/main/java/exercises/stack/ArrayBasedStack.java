@@ -15,6 +15,10 @@ public class ArrayBasedStack<T> implements Stack<T> {
         nodes = (T[]) Array.newInstance(clazz, DEFAULT_SIZE);
     }
 
+    public ArrayBasedStack(T[] nodes) {
+        this.nodes = nodes;
+    }
+
     @Override
     public void push(T node) {
         if (index == nodes.length - 1) {
