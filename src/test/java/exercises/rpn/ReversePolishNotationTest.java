@@ -21,4 +21,22 @@ public class ReversePolishNotationTest {
 
         Assertions.assertThat(actual).isEqualTo(expected);
     }
+
+    @Test
+    public void testComplexExpressionWithEqualPriority() {
+        String input = "5+6-7";
+        String expected = "56+7-";
+        String actual = translator.translate(input);
+
+        Assertions.assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    public void test() {
+        String input = "5+6-7-8+1+5";
+        String expected = "56+7-8-1+5+";
+        String actual = translator.translate(input);
+
+        Assertions.assertThat(actual).isEqualTo(expected);
+    }
 }
