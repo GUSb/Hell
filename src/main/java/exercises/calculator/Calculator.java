@@ -3,8 +3,11 @@ package exercises.calculator;
 import exercises.stack.MapBasedStack;
 import exercises.stack.Stack;
 
+import static exercises.calculator.Operator.isOperator;
+
 public class Calculator {
 
+    private static final String EXPRESSION_SEPARATOR = " ";
     private static Stack<String> stack;
     private static String result;
 
@@ -12,10 +15,9 @@ public class Calculator {
         stack = new MapBasedStack<>();
         result = "";
 
-        for (char token : expression.toCharArray()) {
-
-            if (isNotOperator(token)) {
-                stack.push(String.valueOf(token));
+        for (String token : expression.split(EXPRESSION_SEPARATOR)) {
+            if (!isOperator(token)) {
+                stack.push(token);
             } else {
                 doArithmeticalOperation(token);
                 stack.push(result);
@@ -25,21 +27,21 @@ public class Calculator {
         return result;
     }
 
-    private static void doArithmeticalOperation(char token) {
-        switch (token) {
-            case '+' : {
+    private static void doArithmeticalOperation(String token) {
+        switch (Operator.of(token)) {
+            case PLUS : {
                 add();
                 break;
             }
-            case '-' : {
+            case MINUS : {
                 subtract();
                 break;
             }
-            case '/' : {
+            case DIVIDER : {
                 divide();
                 break;
             }
-            case '*' : {
+            case MULTIPLIER : {
                 multiply();
                 break;
             }
@@ -68,9 +70,5 @@ public class Calculator {
         String first = stack.pop();
         String second = stack.pop();
         result = String.valueOf(Integer.valueOf(first) + Integer.valueOf(second));
-    }
-
-    private static boolean isNotOperator(char token) {
-        return token != '+' && token != '-' && token != '*' && token != '/'  ;
     }
 }
