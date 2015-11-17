@@ -38,4 +38,14 @@ public class ArrayBasedStack<T> implements Stack<T> {
         index--;
         return node;
     }
+
+    @Override
+    public T peak() {
+        return nodes[index - 1];
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return index == 0;
+    }
 }

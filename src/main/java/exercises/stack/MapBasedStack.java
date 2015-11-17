@@ -28,4 +28,16 @@ public class MapBasedStack<T> implements Stack<T> {
         index--;
         return node;
     }
+
+    @Override
+    public T peak() {
+        return nodes.get(index);
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return index == 0;
+    }
+
+
 }

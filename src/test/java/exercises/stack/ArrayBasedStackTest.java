@@ -51,6 +51,38 @@ public class ArrayBasedStackTest {
         addNodes(expectedSize);
     }
 
+    @Test
+    public void testPeak() {
+        final String first = "input";
+        final String second = "input";
+        stack.push(first);
+        stack.push(second);
+        String actual = stack.peak();
+        assertThat(actual).isEqualTo(second);
+    }
+
+    @Test
+    public void testIsEmpty() {
+        final String first = "input";
+        final String second = "input";
+        stack.push(first);
+        stack.push(second);
+        stack.pop();
+        stack.pop();
+        boolean actual = stack.isEmpty();
+        assertThat(actual).isTrue();
+    }
+
+    @Test
+    public void testIsNotEmpty() {
+        final String first = "input";
+        final String second = "input";
+        stack.push(first);
+        stack.push(second);
+        boolean actual = stack.isEmpty();
+        assertThat(actual).isFalse();
+    }
+
     private void addNodes(int size) {
         for (int i = 0; i < size; i++) {
             stack.push(String.valueOf(i));

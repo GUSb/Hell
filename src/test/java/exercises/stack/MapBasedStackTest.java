@@ -43,4 +43,36 @@ public class MapBasedStackTest {
         final String actual = stack.pop();
         assertThat(actual).isEqualTo(inputValueFirst);
     }
+
+    @Test
+    public void testPeak() {
+        final String first = "input";
+        final String second = "input";
+        stack.push(first);
+        stack.push(second);
+        String actual = stack.peak();
+        assertThat(actual).isEqualTo(second);
+    }
+
+    @Test
+    public void testIsEmpty() {
+        final String first = "input";
+        final String second = "input";
+        stack.push(first);
+        stack.push(second);
+        stack.pop();
+        stack.pop();
+        boolean actual = stack.isEmpty();
+        assertThat(actual).isTrue();
+    }
+
+    @Test
+    public void testIsNotEmpty() {
+        final String first = "input";
+        final String second = "input";
+        stack.push(first);
+        stack.push(second);
+        boolean actual = stack.isEmpty();
+        assertThat(actual).isFalse();
+    }
 }
