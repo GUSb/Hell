@@ -25,8 +25,14 @@ public class MapTest {
 
     @Test
     public void putValueToMapReturnsTrue() throws Exception {
-        boolean actual = map.put("One", 1);
+        boolean actual = map.put("Four", 4);
         assertThat(actual).isTrue();
+    }
+
+    @Test
+    public void putKeyTahAlreadyExistsReturnsFalse() throws Exception {
+        boolean actual = map.put("One", 1);
+        assertThat(actual).isFalse();
     }
 
     @Test

@@ -24,7 +24,7 @@ public class Map<K, V> {
 
     public boolean put(K key, V value) {
 
-        if (value == null) {
+        if (value == null || contains(key)) {
             return false;
         }
 
