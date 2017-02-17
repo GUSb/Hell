@@ -58,20 +58,21 @@ public class HashMap<K, V> {
         return get(key) != null;
     }
 
-    public boolean remove(K key) {
+    public V remove(K key) {
         int hash = key.hashCode();
         int index = index(hash);
         Entry<K, V> pair = table[index];
-        Integer oldSize = size;
+        V deleted = null;
 
         if (pair.next == null) {
+            deleted = table[index].value;
             table[index] = null;
             --size;
         } else {
             table[index] = delete(pair, key);
         }
 
-        return oldSize > size;
+        return deleted;
     }
 
     public int size() {
