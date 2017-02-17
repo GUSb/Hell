@@ -5,13 +5,13 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MapTest {
+public class HashMapTest {
 
-    private Map<String, Integer> map;
+    private HashMap<String, Integer> map;
 
     @Before
     public void setUp() throws Exception {
-        map = new Map<>();
+        map = new HashMap<>();
         map.put("One", 1);
         map.put("Two", 2);
         map.put("Three", 3);
@@ -45,6 +45,12 @@ public class MapTest {
     public void containsReturnFalseWhenMapHasNotInputKey() throws Exception {
         boolean actual = map.contains("Krakow");
         assertThat(actual).isFalse();
+    }
+
+    @Test
+    public void removeDeletesNodeMappedToInputKeyWhenPairSizeIsOne() throws Exception {
+        map.remove("One");
+        assertThat(map.contains("One")).isFalse();
     }
 
     @Test

@@ -1,7 +1,7 @@
 package structures.map;
 
 @SuppressWarnings("unchecked")
-public class Map<K, V> {
+public class HashMap<K, V> {
 
     private static final int DEFAULT_CAPACITY = 10;
     private static final int DEFAULT_THRESHOLD = 8;
@@ -12,12 +12,12 @@ public class Map<K, V> {
 
     private Entry<K, V>[] table;
 
-    public Map() {
+    public HashMap() {
         this(DEFAULT_CAPACITY);
         threshold = DEFAULT_THRESHOLD;
     }
 
-    public Map(int capacity) {
+    public HashMap(int capacity) {
         this.capacity = capacity;
         table = (Entry<K, V>[]) new Entry[DEFAULT_CAPACITY];
     }
@@ -62,9 +62,15 @@ public class Map<K, V> {
         int hash = key.hashCode();
         int index = index(hash);
         Entry<K, V> pair = table[index];
-
         Integer oldSize = size;
-        delete(pair, key);
+
+        if (pair.next == null) {
+            table[index] = null;
+            --size;
+        } else {
+            delete(pair, key);
+        }
+
         return oldSize > size;
     }
 
