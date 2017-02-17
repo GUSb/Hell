@@ -54,6 +54,12 @@ public class HashMapTest {
     }
 
     @Test
+    public void removeDeletesNodeMappedToInputKeyWhenPairSizeIsMoreThanOne() throws Exception {
+        map.remove("Two");
+        assertThat(map.contains("Two")).isFalse();
+    }
+
+    @Test
     public void sizeGrowsWhenAddedNewNode() throws Exception {
         map.put("Four", 4);
         int expected = 4;

@@ -68,7 +68,7 @@ public class HashMap<K, V> {
             table[index] = null;
             --size;
         } else {
-            delete(pair, key);
+            table[index] = delete(pair, key);
         }
 
         return oldSize > size;
@@ -83,8 +83,9 @@ public class HashMap<K, V> {
         if (node != null && node.hash == key.hashCode()) {
             node = node.next;
             --size;
+            return node;
         } else if (node != null) {
-            delete(node.next, key);
+            node.next = delete(node.next, key);
         }
 
         return node;
