@@ -1,32 +1,37 @@
 package exercises.rpn;
 
+import structures.stack.MapBasedStack;
+import structures.stack.Stack;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import static exercises.calculator.Operator.isOperator;
+
 public class ReversePolishNotation {
 
-    private StringBuffer sb = new StringBuffer();
+    private final String RPN_TOKENS_SEPARATOR = " ";
+
+    private Pattern pattern = Pattern.compile("[0-9]+|[\\+\\-\\*/]");
+    private StringBuilder sb = new StringBuilder();
 
     public String translate(String expression) {
+        Stack<String> operators = new MapBasedStack<>();
         expression = expression.trim();
-        char[] tokens = expression.toCharArray();
+        Stack<String> rpnTokens = findMatches(expression).reverse();
 
-        for (char token : tokens) {
+        while (!rpnTokens.isEmpty()) {
+            String token = rpnTokens.pop();
+            
+            if (!isOperator(token)) {
+                sb.append(token).append(RPN_TOKENS_SEPARATOR);
+            } else if (isOperator(token)){
+                operators.push(token);
 
-            if (token == '+' || token == '-') {
-
-                if (!(expression.startsWith("+") || (expression.startsWith("-")))) {
-                    sb.append(expression.charAt(expression.indexOf(token) - 1));
+                if (rpnTokens.isEmpty()) {
+                    sb.append(operators.pop());
                 }
-
-                sb.append(expression.charAt(expression.indexOf(token) + 1));
-                sb.append(expression.charAt(expression.indexOf(token)));
-
-                if (expression.length() > expression.indexOf(token) + 2) {
-
-                    expression = expression.substring(expression.indexOf(token) + 2);
-
-                    if (isExpressionHaveOperands(expression)) {
-                        translate(expression);
-                        break;
-                    }
+                else if ((!rpnTokens.isEmpty()) && operators.size() > 0) {
+                    sb.append(operators.pop()).append(RPN_TOKENS_SEPARATOR);
                 }
             }
         }
@@ -34,7 +39,12 @@ public class ReversePolishNotation {
         return sb.toString();
     }
 
-    private boolean isExpressionHaveOperands(String expression) {
-        return expression.contains("+") || expression.contains("-");
+    private Stack<String> findMatches(String expression) {
+        Matcher matcher = pattern.matcher(expression);
+        Stack<String> rpnTokens = new MapBasedStack<>();
+        while (matcher.find()) {
+            rpnTokens.push(matcher.group().trim());
+        }
+        return rpnTokens;
     }
 }

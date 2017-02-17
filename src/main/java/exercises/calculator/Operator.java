@@ -6,33 +6,31 @@ public enum Operator {
     DIVIDER("/"),
     MULTIPLIER("*");
 
-    private String value;
+    private String sign;
 
-    Operator(String value) {
-        this.value = value;
+    Operator(String sign) {
+        this.sign = sign;
     }
 
     public static boolean isOperator(String token) {
-        return token.equals(PLUS.toString()) || token.equals(MINUS.toString()) ||
-                token.equals(MULTIPLIER.toString()) || token.equals(DIVIDER.toString());
+        return token.equals(PLUS.toString()) ||
+                token.equals(MINUS.toString()) ||
+                token.equals(DIVIDER.toString()) ||
+                token.equals(MULTIPLIER.toString());
+    }
+
+    public static Operator of(String token) {
+
+        for (Operator operator : Operator.values()) {
+            if (operator.toString().equals(token)) {
+                return operator;
+            }
+        }
+        throw new IllegalOperatorException("The input value " + token + " is not valid");
     }
 
     @Override
     public String toString() {
-        return value;
-    }
-
-    public static Operator of(String token) {
-        Operator operator = null;
-        for (Operator op : Operator.values()) {
-            if (op.toString().equals(token)) {
-                operator = op;
-                break;
-            }
-        }
-        if (operator == null) {
-            throw new IllegalOperatorException("The input value " + token + " is not ");
-        }
-        return operator;
+        return sign;
     }
 }

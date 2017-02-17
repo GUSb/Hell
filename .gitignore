@@ -5,4 +5,4 @@ classes/
 .project
 .settings/
 *.iml
-.gradle/
+.gradle

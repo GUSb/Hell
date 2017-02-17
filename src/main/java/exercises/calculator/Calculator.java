@@ -1,33 +1,33 @@
 package exercises.calculator;
 
-import exercises.stack.MapBasedStack;
-import exercises.stack.Stack;
+import structures.stack.MapBasedStack;
+import structures.stack.Stack;
 
 import static exercises.calculator.Operator.isOperator;
 
 public class Calculator {
 
-    private static final String EXPRESSION_SEPARATOR = " ";
-    private static Stack<String> stack;
-    private static String result;
+    private final String EXPRESSION_SEPARATOR = " ";
+    private Stack<String> stack;
+    private String result;
 
-    public static String calculate(String expression) {
+    public String calculate(String expression) {
         stack = new MapBasedStack<>();
         result = "";
 
         for (String token : expression.split(EXPRESSION_SEPARATOR)) {
-            if (!isOperator(token)) {
-                stack.push(token);
-            } else {
+            if (isOperator(token)) {
                 doArithmeticalOperation(token);
                 stack.push(result);
+            } else {
+                stack.push(token);
             }
         }
 
         return result;
     }
 
-    private static void doArithmeticalOperation(String token) {
+    private void doArithmeticalOperation(String token) {
         switch (Operator.of(token)) {
             case PLUS : {
                 add();
@@ -48,25 +48,25 @@ public class Calculator {
         }
     }
 
-    private static void multiply() {
+    private void multiply() {
         String first = stack.pop();
         String second = stack.pop();
         result = String.valueOf(Integer.valueOf(first) * Integer.valueOf(second));
     }
 
-    private static void divide() {
+    private void divide() {
         String first = stack.pop();
         String second = stack.pop();
         result = String.valueOf(Integer.valueOf(second) / Integer.valueOf(first));
     }
 
-    private static void subtract() {
+    private void subtract() {
         String first = stack.pop();
         String second = stack.pop();
         result = String.valueOf(Integer.valueOf(second) - Integer.valueOf(first));
     }
 
-    private static void add() {
+    private void add() {
         String first = stack.pop();
         String second = stack.pop();
         result = String.valueOf(Integer.valueOf(first) + Integer.valueOf(second));
