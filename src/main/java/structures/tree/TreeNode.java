@@ -24,7 +24,7 @@ public class TreeNode {
         this.right = null;
     }
 
-    public static TreeNode prepare(int[] data) {
+    public static TreeNode prepare(int ... data) {
         TreeNode head = new TreeNode(data[0]);
 
         for (int i = 1; i < data.length; i++) {
