@@ -1,8 +1,9 @@
 package algorithms;
 
-import util.LogUtils;
+import java.util.ArrayList;
 
-import java.util.Arrays;
+import static util.LogUtils.info;
+import static util.LogUtils.printArray;
 
 public class AlgorithmsService {
 
@@ -33,7 +34,39 @@ public class AlgorithmsService {
             }
         }
 
-        LogUtils.printArray(arr);
+        printArray(arr);
         return arr[m-1][n-1];
+    }
+
+    public ArrayList<String> combParenthesis(int pairs) {
+
+        ArrayList<String> combinations = new ArrayList<>();
+
+        if (pairs > 0)
+            combParenthesisHelper(combinations, "", pairs, pairs);
+
+        return combinations;
+    }
+
+    private void combParenthesisHelper(ArrayList<String> combinations, String combo, int left, int right) {
+
+        info(String.format("left: %s | right: %s | combo: %s", left, right, combo));
+
+        if (left > right) {
+            return;
+        }
+
+        if (left == 0 && right == 0) {
+            combinations.add(combo);
+            info(combo);
+        }
+
+        if (left > 0) {
+            combParenthesisHelper(combinations, combo + "(", left - 1, right);
+        }
+
+        if (right > 0) {
+            combParenthesisHelper(combinations, combo + ")", left, right - 1);
+        }
     }
 }

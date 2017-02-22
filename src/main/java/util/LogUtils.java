@@ -22,6 +22,10 @@ public class LogUtils {
             sb.deleteCharAt(sb.length() - 1).append("]").append(System.lineSeparator());
         }
 
-        System.out.println((sb.toString()));
+        info(sb.toString());
+    }
+
+    public static void info(String message) {
+        System.out.println(message);
     }
 }
