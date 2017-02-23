@@ -66,6 +66,12 @@ public class HashMapTest {
     }
 
     @Test
+    public void removeReturnsDeletedNodeValueWhenPairSizeIsMoreThanOne() throws Exception {
+        Integer actual = map.remove("Two");
+        assertThat(actual).isEqualTo(2);
+    }
+
+    @Test
     public void sizeGrowsWhenAddedNewNode() throws Exception {
         map.put("Four", 4);
         int expected = 4;

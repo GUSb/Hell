@@ -81,7 +81,7 @@ public class HashMap<K, V> {
 
     private Entry<K, V> delete(Entry<K, V> node, K key) {
 
-        if (node != null && node.hash == key.hashCode()) {
+        if (node != null && node.hash == key.hashCode() && node.key.equals(key)) {
             node = node.next;
             --size;
             return node;
