@@ -17,14 +17,6 @@ public abstract class CollectionsHelper {
         return data;
     }
 
-    public static Map<Key, Integer> generate(int size, Map<Key, Integer> data) {
-        for (int i = 0; i < size; i++) {
-            data.put(new Key(i), i);
-        }
-
-        return data;
-    }
-
     public static long countTimeMillis(Callable task) {
         long time = 0;
 

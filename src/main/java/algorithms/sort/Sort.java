@@ -1,6 +1,6 @@
 package algorithms.sort;
 
-import java.util.Arrays;
+import static util.LogUtils.printArray;
 
 public class Sort {
 
@@ -10,12 +10,8 @@ public class Sort {
         int nextElement;
         int index;
 
-        // for statistics
-        int itr = 0;
-        int swaps = 0;
-
         while (!sorted) {
-            printElements(elements);
+            printArray(elements);
             sorted = true;
             for (index = 0; index < elements.length - 1; index++) {
                 currentElement = elements[index];
@@ -24,12 +20,9 @@ public class Sort {
                     elements[index] = nextElement;
                     elements[index + 1] = currentElement;
                     sorted = false;
-                    swaps++;
                 }
-                itr++;
             }
         }
-        printStatistic(itr, swaps, swaps);
         return elements;
     }
 
@@ -38,12 +31,9 @@ public class Sort {
         int leftIndex;
         int elementToSort;
 
-        // for statistics
-        int itr = 0;
-
         for (rightIndex = 1; rightIndex < elements.length; rightIndex++) {
 
-            printElements(elements);
+            printArray(elements);
             elementToSort = elements[rightIndex];
 
             for (leftIndex = rightIndex - 1;
@@ -51,13 +41,10 @@ public class Sort {
                  leftIndex--) {
 
                 elements[leftIndex + 1] = elements[leftIndex];
-                itr++;
             }
             elements[leftIndex + 1] = elementToSort;
-            itr++;
         }
-        printElements(elements);
-        printStatistic(itr, 0, 0);
+        printArray(elements);
         return elements;
     }
 
@@ -67,31 +54,21 @@ public class Sort {
         int smallestElementIndex;
         int elementToSwap;
 
-        // for statistics
-        int itr = 0;
-        int swaps = 0;
-        int checks = 0;
-
         for (leftIndex = 0; leftIndex < elements.length - 1; leftIndex++) {
             smallestElementIndex = leftIndex;
 
             for (rightIndex = leftIndex + 1; rightIndex < elements.length; rightIndex++) {
                 if (elements[leftIndex] > elements[rightIndex]) {
                     smallestElementIndex = rightIndex;
-                    checks++;
                 }
-                itr++;
             }
             elementToSwap = elements[leftIndex];
             elements[leftIndex] = elements[smallestElementIndex];
             elements[smallestElementIndex] = elementToSwap;
 
-            itr++;
-            swaps++;
-            printElements(elements);
+            printArray(elements);
         }
-        printElements(elements);
-        printStatistic(itr, swaps, checks);
+        printArray(elements);
         return elements;
     }
 
@@ -101,19 +78,11 @@ public class Sort {
         int temp;
         int pivot = elements[lowerIndex + (higherIndex - lowerIndex)/2];
 
-        // for statistics
-        int itr = 0;
-        int swaps = 0;
-        int checks = 0;
-
         while (lowerIndex <= higherIndex) {
-            itr++;
             while (elements[lowerIndex] < pivot) {
-                itr++;
                 lowerIndex++;
             }
             while (elements[higherIndex] > pivot) {
-                itr++;
                 higherIndex--;
             }
             if (lowerIndex <= higherIndex) {
@@ -123,20 +92,15 @@ public class Sort {
 
                 lowerIndex++;
                 higherIndex--;
-                swaps++;
-                checks++;
             }
             if (lowerIndex < startHigherIndex) {
-                checks++;
                 quickSort(elements, lowerIndex, startHigherIndex);
             }
             if (higherIndex > startLowerIndex) {
-                checks++;
                 quickSort(elements, startLowerIndex, higherIndex);
             }
         }
-        printElements(elements);
-        printStatistic(itr, swaps, checks);
+        printArray(elements);
         return elements;
     }
 
@@ -171,20 +135,9 @@ public class Sort {
                 merge[i] = arrRight[rIndex];
                 rIndex++;
             }
-            System.out.println(Arrays.toString(merge));
+            printArray(merge);
         }
 
         return merge;
-    }
-
-    private static void printElements(int[] elements) {
-        for (int element : elements) {
-            System.out.print("[" + element + "] ");
-        }
-        System.out.println();
-    }
-
-    private static void printStatistic(int itr, int swaps, int check) {
-        System.out.println(String.format(" itr: %s \n swaps: %s \n checks: %s", itr, swaps, check));
     }
 }
