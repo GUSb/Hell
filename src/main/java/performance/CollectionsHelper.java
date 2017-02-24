@@ -1,11 +1,18 @@
 package performance;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.util.Collection;
-import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.Callable;
 
-public abstract class CollectionsHelper {
+public class CollectionsHelper {
+
+    private static final Logger logger = LoggerFactory.getLogger(CollectionsHelper.class);
+    private static final String ERROR_MESSAGE = "Error occur during task execution";
+
+    private CollectionsHelper() {
+    }
 
     public static Collection<Integer> generate (int size, int randomization, Collection<Integer> data) {
         Random random = new Random();
@@ -25,7 +32,7 @@ public abstract class CollectionsHelper {
             task.call();
             time = System.currentTimeMillis() - time;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.info(ERROR_MESSAGE, e);
         }
 
         return time;
@@ -39,7 +46,7 @@ public abstract class CollectionsHelper {
             task.call();
             time = System.nanoTime() - time;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.info(ERROR_MESSAGE, e);
         }
 
         return time;

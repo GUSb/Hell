@@ -22,15 +22,9 @@ public class ArrayBasedStackTest {
         assertThat(actual).isEqualTo(expected);
     }
 
-    @Test(expected = RuntimeException.class)
-    public void testStackIsEmptyException() {
-        final String inputValueFirst = "first stack node";
-        final String inputValueSecond = "second stack node";
-        stack.push(inputValueFirst);
-        stack.push(inputValueSecond);
-        stack.pop();
-        stack.pop();
-        stack.pop();
+    @Test()
+    public void popReturnsNullWhenStackIsEmpty() {
+        assertThat(stack.pop()).isNull();
     }
 
     @Test()

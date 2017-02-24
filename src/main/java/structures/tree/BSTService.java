@@ -1,15 +1,17 @@
 package structures.tree;
 
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.Stack;
 
 public class BSTService {
 
     private Queue<Integer> queue = new LinkedList<>();
 
     public void inOrderTraversal(TreeNode root) {
-        if (root == null) return;
+        if (root == null) {
+            return;
+        }
 
         inOrderTraversal(root.left);
         queue.add(root.data);
@@ -17,7 +19,9 @@ public class BSTService {
     }
 
     public void preOrderTraversal(TreeNode root) {
-        if (root == null) return;
+        if (root == null) {
+            return;
+        }
 
         queue.add(root.data);
         inOrderTraversal(root.left);
@@ -25,7 +29,9 @@ public class BSTService {
     }
 
     public void postOrderTraversal(TreeNode root) {
-        if (root == null) return;
+        if (root == null) {
+            return;
+        }
 
         inOrderTraversal(root.left);
         inOrderTraversal(root.right);
@@ -34,7 +40,7 @@ public class BSTService {
 
     public TreeNode findKthSmallest(TreeNode root, int k) {
 
-        Stack<TreeNode> stack = new Stack<>();
+        Deque<TreeNode> stack = new LinkedList<>();
 
         while (!stack.isEmpty() || root != null) {
             if (root != null) {
@@ -43,7 +49,9 @@ public class BSTService {
             } else {
                 TreeNode temp = stack.pop();
                 k--;
-                if (k == 0) return temp;
+                if (k == 0) {
+                    return temp;
+                }
 
                 root = temp.right;
             }
@@ -63,9 +71,13 @@ public class BSTService {
 
     private boolean validate(TreeNode root, Integer min, Integer max) {
 
-        if (root == null) return true;
+        if (root == null) {
+            return true;
+        }
 
-        if (root.data < min || root.data > max) return false;
+        if (root.data < min || root.data > max) {
+            return false;
+        }
 
         return validate(root.left, min, root.data) && validate(root.right, root.data, max);
     }

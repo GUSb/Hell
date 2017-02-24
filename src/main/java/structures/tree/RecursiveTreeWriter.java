@@ -5,8 +5,13 @@ import java.util.LinkedList;
 
 public class RecursiveTreeWriter implements TreeWriter {
 
+    private static final String SPLITTER = ",";
+    private static final String EMPTY = "NULL";
+
+    @Override
     public String serializeTree(TreeNode root) {
-        if (root == null) return null;
+        if (root == null)
+            return null;
 
         StringBuilder sb = new StringBuilder();
         serializeTreeHelper(root, sb);
@@ -15,8 +20,10 @@ public class RecursiveTreeWriter implements TreeWriter {
         return sb.toString();
     }
 
+    @Override
     public TreeNode restoreTree(String str) {
-        if (str == null || str.isEmpty()) return null;
+        if (str == null || str.isEmpty())
+            return null;
 
         LinkedList<String> nodes = new LinkedList<>(Arrays.asList(str.split(SPLITTER)));
 
@@ -30,8 +37,10 @@ public class RecursiveTreeWriter implements TreeWriter {
         else
             sb.append(node.data).append(SPLITTER);
 
-        if (node != null) serializeTreeHelper(node.left, sb);
-        if (node != null) serializeTreeHelper(node.right, sb);
+        if (node != null)
+            serializeTreeHelper(node.left, sb);
+        if (node != null)
+            serializeTreeHelper(node.right, sb);
     }
 
     private TreeNode restoreTreeHelper(LinkedList<String> nodes) {

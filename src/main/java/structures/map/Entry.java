@@ -16,14 +16,20 @@ class Entry<K, V> {
         this.next = next;
     }
 
-    public Entry() {
-    }
-
     @Override
     public boolean equals(Object obj) {
-        if (obj == this) return true;
-        if (obj == null) return false;
-        if (!(obj instanceof Entry)) return false;
+
+        if (obj == this) {
+            return true;
+        }
+
+        if (obj == null) {
+            return false;
+        }
+
+        if (!(obj instanceof Entry)) {
+            return false;
+        }
 
         Entry other = (Entry) obj;
         return Objects.equals(other.key, this.key)

@@ -4,6 +4,9 @@ import static util.LogUtils.printArray;
 
 public class Sort {
 
+    private Sort() {
+    }
+
     public static int[] bubbleSort(int[] elements) {
         boolean sorted = false;
         int currentElement;
@@ -105,7 +108,9 @@ public class Sort {
     }
 
     public static int[] mergeSort(int[] elements) {
-        if (elements.length == 1) return elements;
+        if (elements.length == 1) {
+            return elements;
+        }
 
         int middle = (elements.length) / 2;
         int[] left = new int[middle];

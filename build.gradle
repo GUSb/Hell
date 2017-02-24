@@ -13,12 +13,11 @@ repositories {
 }
 
 dependencies {
-    compile 'org.codehaus.groovy:groovy-all:2.4.4',
+    compile 'org.codehaus.groovy:groovy-all:2.4.8',
             'org.slf4j:slf4j-api:1.7.22'
 
-    testCompile 'junit:junit:4.11',
-            'org.mockito:mockito-core:1.9.5',
-            'org.assertj:assertj-core:1.6.1',
+    testCompile 'junit:junit:4.12',
+            'org.mockito:mockito-core:2.7.11',
             'org.assertj:assertj-core:3.6.2'
 }
 
@@ -29,8 +28,8 @@ buildscript {
         maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
-        classpath "org.sonarqube.gradle:gradle-sonarqube-plugin:1.0",
-                "info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.1.6"
+        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.2.1",
+                "info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.1.11"
     }
 }
 

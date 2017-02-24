@@ -5,8 +5,15 @@ import java.util.Queue;
 
 public class StackTreeWriter implements TreeWriter {
 
+    private static final String SPLITTER = ",";
+    private static final String EMPTY = "NULL";
+
+    @Override
     public String serializeTree(TreeNode root) {
-        if (root == null) return null;
+
+        if (root == null) {
+            return null;
+        }
 
         StringBuilder sb = new StringBuilder();
         Queue<TreeNode> queue = new LinkedList<>();
@@ -16,7 +23,9 @@ public class StackTreeWriter implements TreeWriter {
         while (!queue.isEmpty()) {
             TreeNode curr = queue.remove();
 
-            if (curr.left == null && curr.right == null) continue;
+            if (curr.left == null && curr.right == null) {
+                continue;
+            }
 
             if (curr.left == null) {
                 sb.append(EMPTY).append(SPLITTER);
@@ -36,8 +45,11 @@ public class StackTreeWriter implements TreeWriter {
         return sb.toString();
     }
 
+    @Override
     public TreeNode restoreTree(String str) {
-        if (str == null || str.isEmpty()) return null;
+        if (str == null || str.isEmpty()) {
+            return null;
+        }
 
         Queue<TreeNode> queue = new LinkedList<>();
         String[] data = str.split(SPLITTER);
@@ -45,8 +57,8 @@ public class StackTreeWriter implements TreeWriter {
         queue.add(root);
 
         for (int i = 1; i < data.length; i += 2) {
-            int currDataLeft = Integer.valueOf(data[i]);
-            int curDataRight = Integer.valueOf(data[i + 1]);
+            int currDataLeft = Integer.parseInt(data[i]);
+            int curDataRight = Integer.parseInt(data[i + 1]);
             TreeNode currNode = queue.remove();
 
             if (currDataLeft != 0) {

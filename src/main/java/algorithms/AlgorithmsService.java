@@ -1,6 +1,7 @@
 package algorithms;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static util.LogUtils.info;
 import static util.LogUtils.printArray;
@@ -11,7 +12,10 @@ public class AlgorithmsService {
      * DFS - not effective here
     * */
     public static int countPathsRec(int m, int n){
-        if (m == 1 || n == 1) return 1;
+
+        if (m == 1 || n == 1) {
+            return 1;
+        }
 
         return countPathsRec(m-1, n) + countPathsRec(m, n-1);
     }
@@ -38,7 +42,7 @@ public class AlgorithmsService {
         return arr[m-1][n-1];
     }
 
-    public ArrayList<String> combParenthesis(int pairs) {
+    public List<String> combParenthesis(int pairs) {
 
         ArrayList<String> combinations = new ArrayList<>();
 

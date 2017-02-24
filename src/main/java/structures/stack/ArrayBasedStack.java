@@ -5,8 +5,8 @@ import java.util.Arrays;
 
 public class ArrayBasedStack<T> implements Stack<T> {
 
-    private final int DEFAULT_SIZE = 5;
-    private final int SIZE_MULTIPLIER = 2;
+    private static final int DEFAULT_SIZE = 5;
+    private static final int SIZE_MULTIPLIER = 2;
 
     private T[] nodes;
     private Integer index = 0;
@@ -30,9 +30,11 @@ public class ArrayBasedStack<T> implements Stack<T> {
 
     @Override
     public T pop() {
+
         if (index == 0) {
-            throw new RuntimeException("Stack is empty");
+            return null;
         }
+
         T node = nodes[index];
         nodes[index] = null;
         index--;

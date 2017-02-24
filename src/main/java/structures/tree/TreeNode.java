@@ -54,9 +54,17 @@ public class TreeNode {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == this) return true;
-        if (obj == null) return false;
-        if (!(obj instanceof TreeNode)) return false;
+        if (obj == this) {
+            return true;
+        }
+
+        if (obj == null) {
+            return false;
+        }
+
+        if (!(obj instanceof TreeNode)) {
+            return false;
+        }
 
         TreeNode other = (TreeNode) obj;
         return Objects.equals(other.data, this.data)
@@ -79,8 +87,13 @@ public class TreeNode {
             TreeNode curr = queue.remove();
             sb.append(curr.data).append(",");
 
-            if (curr.left != null) queue.add(curr.left);
-            if (curr.right != null) queue.add(curr.right);
+            if (curr.left != null) {
+                queue.add(curr.left);
+            }
+
+            if (curr.right != null) {
+                queue.add(curr.right);
+            }
         }
 
         sb.deleteCharAt(sb.length() - 1);

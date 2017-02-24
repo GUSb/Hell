@@ -7,7 +7,7 @@ import static exercises.calculator.Operator.isOperator;
 
 public class Calculator {
 
-    private final String EXPRESSION_SEPARATOR = " ";
+    private static final String EXPRESSION_SEPARATOR = " ";
     private Stack<String> stack;
     private String result;
 

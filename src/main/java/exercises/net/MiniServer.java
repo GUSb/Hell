@@ -6,6 +6,9 @@ import java.net.URL;
 
 public class MiniServer {
 
+    private MiniServer() {
+    }
+
     public static String sendRequest(String targetURL, String body) {
         HttpURLConnection connection = null;
 
