@@ -64,12 +64,23 @@ public class HashMap<K, V> {
         Entry<K, V> pair = table[index];
         V deleted = null;
 
-        if (pair.next == null) {
-            deleted = table[index].value;
-            table[index] = null;
+        if (pair.hash == key.hashCode() && pair.key.equals(key)) {
+            deleted = pair.value;
+            table[index] = pair.next;
             --size;
         } else {
-            table[index] = delete(pair, key);
+            Entry<K, V> copy = pair;
+
+            while (copy != null) {
+                if (copy.next != null && copy.next.hash == key.hashCode() && copy.next.key.equals(key)) {
+                    deleted = copy.next.value;
+                    copy.next = copy.next.next;
+                    break;
+                }
+                copy = copy.next;
+            }
+
+            table[index] = pair;
         }
 
         return deleted;
@@ -77,19 +88,6 @@ public class HashMap<K, V> {
 
     public int size() {
         return size;
-    }
-
-    private Entry<K, V> delete(Entry<K, V> node, K key) {
-
-        if (node != null && node.hash == key.hashCode() && node.key.equals(key)) {
-            node = node.next;
-            --size;
-            return node;
-        } else if (node != null) {
-            node.next = delete(node.next, key);
-        }
-
-        return node;
     }
 
     private int index(int hash) {
