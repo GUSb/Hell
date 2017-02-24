@@ -53,6 +53,10 @@ sourceSets {
     }
 }
 
+test {
+    exclude '**/performance/**'
+}
+
 sonarqube {
     properties {
         property "sonar.host.url", sonarHostUrl
