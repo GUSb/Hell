@@ -1,12 +1,10 @@
 package util;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import performance.CollectionsHelper;
+import java.util.logging.Logger;
 
 public class LogUtils {
 
-    private static final Logger logger = LoggerFactory.getLogger(CollectionsHelper.class);
+    private static final Logger logger = Logger.getLogger("infoLogger");
 
     private LogUtils() {
     }

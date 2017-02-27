@@ -4,8 +4,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
-import java.util.*;
+import static util.LogUtils.info;
 
 @RunWith(Parameterized.class)
 public class CollectionsPerformanceTest {
@@ -54,8 +57,7 @@ public class CollectionsPerformanceTest {
 
     @Test
     public void arrayListPerformance() {
-        System.out.println();
-        System.out.println(message);
+        info(message);
         List<Integer> array = performance.generateArrayList(size, randomization);
         performance.sort(array);
         performance.addNode(array, node);
@@ -68,8 +70,7 @@ public class CollectionsPerformanceTest {
 
     @Test
     public void linkedListPerformance() {
-        System.out.println();
-        System.out.println(message);
+        info(message);
         List<Integer> linked = performance.generateLinkedList(size, randomization);
         performance.sort(linked);
         performance.addNode(linked, node);

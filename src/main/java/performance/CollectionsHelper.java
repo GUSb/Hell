@@ -1,15 +1,13 @@
 package performance;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import java.util.Collection;
 import java.util.Random;
 import java.util.concurrent.Callable;
+import java.util.logging.Logger;
 
 public class CollectionsHelper {
 
-    private static final Logger logger = LoggerFactory.getLogger(CollectionsHelper.class);
-    private static final String ERROR_MESSAGE = "Error occur during task execution";
+    private static final Logger logger = Logger.getLogger("collectionHelperLogger");
 
     private CollectionsHelper() {
     }
@@ -32,7 +30,7 @@ public class CollectionsHelper {
             task.call();
             time = System.currentTimeMillis() - time;
         } catch (Exception e) {
-            logger.info(ERROR_MESSAGE, e);
+            logger.info(e.getMessage());
         }
 
         return time;
@@ -46,7 +44,7 @@ public class CollectionsHelper {
             task.call();
             time = System.nanoTime() - time;
         } catch (Exception e) {
-            logger.info(ERROR_MESSAGE, e);
+            logger.info(e.getMessage());
         }
 
         return time;
