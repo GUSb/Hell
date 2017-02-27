@@ -34,7 +34,7 @@ public class HashMap<K, V> {
         Entry<K, V> old = table[index];
         table[index] = new Entry<>(key, value, key.hashCode(), old);
 
-        size++;
+        increment();
         return true;
     }
 
@@ -64,17 +64,18 @@ public class HashMap<K, V> {
         Entry<K, V> pair = table[index];
         V deleted = null;
 
-        if (pair.hash == key.hashCode() && pair.key.equals(key)) {
+        if (pair != null && pair.hash == key.hashCode() && pair.key.equals(key)) {
             deleted = pair.value;
             table[index] = pair.next;
-            --size;
-        } else {
+            decrement();
+        } else if (pair != null) {
             Entry<K, V> copy = pair;
 
             while (copy != null) {
                 if (copy.next != null && copy.next.hash == key.hashCode() && copy.next.key.equals(key)) {
                     deleted = copy.next.value;
                     copy.next = copy.next.next;
+                    decrement();
                     break;
                 }
                 copy = copy.next;
@@ -92,5 +93,13 @@ public class HashMap<K, V> {
 
     private int index(int hash) {
         return Math.abs(hash % capacity);
+    }
+
+    private void increment() {
+        ++size;
+    }
+
+    private void decrement() {
+        --size;
     }
 }

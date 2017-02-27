@@ -11,6 +11,8 @@ public class HashMapTest {
 
     @Before
     public void setUp() throws Exception {
+        // table[0] = 1
+        // table[4] = 3 -> 2
         map = new HashMap<>();
         map.put("One", 1);
         map.put("Two", 2);
@@ -30,7 +32,7 @@ public class HashMapTest {
     }
 
     @Test
-    public void putKeyTahAlreadyExistsReturnsFalse() throws Exception {
+    public void putKeyThatAlreadyExistsReturnsFalse() throws Exception {
         boolean actual = map.put("One", 1);
         assertThat(actual).isFalse();
     }
@@ -69,6 +71,33 @@ public class HashMapTest {
     public void removeReturnsDeletedNodeValueWhenPairSizeIsMoreThanOne() throws Exception {
         Integer actual = map.remove("Two");
         assertThat(actual).isEqualTo(2);
+    }
+
+    @Test
+    public void removeReturnsDeletedNodeValueWhenPairSizeIsMoreThanOneAndTargetedNodeIsFirstInList() throws Exception {
+        Integer actual = map.remove("Three");
+        assertThat(actual).isEqualTo(3);
+    }
+
+    @Test
+    public void removeFewElementsDecreasesSize() throws Exception {
+        map.remove("One");
+        map.remove("Two");
+        assertThat(map.size()).isEqualTo(1);
+    }
+
+    @Test
+    public void removeAllElementsReturnsZeroSize() throws Exception {
+        map.remove("One");
+        map.remove("Two");
+        map.remove("Three");
+        assertThat(map.size()).isEqualTo(0);
+    }
+
+    @Test
+    public void removeReturnsNullIfNoKeyFound() throws Exception {
+        Integer actual = map.remove("Krakow");
+        assertThat(actual).isNull();
     }
 
     @Test
