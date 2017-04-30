@@ -7,68 +7,64 @@ import static exercises.calculator.Operator.isOperator;
 
 public class RPNCalculator implements Calculator {
 
-    private Stack<String> stack;
-    private String result;
-
     @Override
     public Double calculate(String expression) {
-        stack = new MapBasedStack<>();
-        result = "";
+        Stack<String> stack = new MapBasedStack<>();
 
         for (String token : expression.split(EXPRESSION_SEPARATOR)) {
             if (isOperator(token)) {
-                doArithmeticalOperation(token);
+                Double first = Double.valueOf(stack.pop());
+                Double second = Double.valueOf(stack.pop());
+                Operator sign = Operator.of(token);
+                String result = doOperation(sign, first, second);
                 stack.push(result);
             } else {
                 stack.push(token);
             }
         }
 
-        return Double.valueOf(result);
+        return Double.valueOf(stack.pop());
     }
 
-    private void doArithmeticalOperation(String token) {
-        switch (Operator.of(token)) {
-            case PLUS : {
-                add();
+    private String doOperation(Operator sign, Double first, Double second) {
+
+        Double result = 0d;
+
+        switch (sign) {
+            case PLUS: {
+                result = add(second, first);
                 break;
             }
-            case MINUS : {
-                subtract();
+            case MINUS: {
+                result = subtract(second, first);
                 break;
             }
-            case DIVIDER : {
-                divide();
+            case DIVIDER: {
+                result = divide(second, first);
                 break;
             }
-            case MULTIPLIER : {
-                multiply();
+            case MULTIPLIER: {
+                result = multiply(second, first);
                 break;
             }
         }
+
+        return String.valueOf(result);
     }
 
-    private void multiply() {
-        String first = stack.pop();
-        String second = stack.pop();
-        result = String.valueOf(Integer.valueOf(first) * Integer.valueOf(second));
+    private Double add(Double first, Double second) {
+        return first + second;
     }
 
-    private void divide() {
-        String first = stack.pop();
-        String second = stack.pop();
-        result = String.valueOf(Integer.valueOf(second) / Integer.valueOf(first));
+    private Double subtract(Double first, Double second) {
+        return first - second;
     }
 
-    private void subtract() {
-        String first = stack.pop();
-        String second = stack.pop();
-        result = String.valueOf(Integer.valueOf(second) - Integer.valueOf(first));
+    private Double divide(Double first, Double second) {
+        return first / second;
     }
 
-    private void add() {
-        String first = stack.pop();
-        String second = stack.pop();
-        result = String.valueOf(Integer.valueOf(first) + Integer.valueOf(second));
+    private Double multiply(Double first, Double second) {
+        return first * second;
     }
 }
