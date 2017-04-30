@@ -26,7 +26,7 @@ public enum Operator {
                 return operator;
             }
         }
-        throw new IllegalOperatorException("The input value " + token + " is not valid");
+        throw new IllegalOperatorException("The input value " + token + " is not valid operator. Valid operators are + - / *");
     }
 
     @Override
