@@ -29,6 +29,48 @@ public enum Operator {
         throw new IllegalOperatorException("The input value " + token + " is not valid operator. Valid operators are + - / *");
     }
 
+    public static String doOperation(Operator sign, Double first, Double second) {
+
+        Double result = 0d;
+
+        switch (sign) {
+            case PLUS: {
+                result = add(first, second);
+                break;
+            }
+            case MINUS: {
+                result = subtract(first, second);
+                break;
+            }
+            case DIVIDER: {
+                result = divide(first, second);
+                break;
+            }
+            case MULTIPLIER: {
+                result = multiply(first, second);
+                break;
+            }
+        }
+
+        return String.valueOf(result);
+    }
+
+    private static Double add(Double first, Double second) {
+        return first + second;
+    }
+
+    private static Double subtract(Double first, Double second) {
+        return first - second;
+    }
+
+    private static Double divide(Double first, Double second) {
+        return first / second;
+    }
+
+    private static Double multiply(Double first, Double second) {
+        return first * second;
+    }
+
     @Override
     public String toString() {
         return sign;

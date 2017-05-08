@@ -2,6 +2,7 @@ package exercises.calculator;
 
 import org.junit.Before;
 import org.junit.Test;
+import structures.stack.ArrayBasedStack;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -11,7 +12,7 @@ public class RPNCalculatorTest {
 
     @Before
     public void setUp() {
-        calculator = new RPNCalculator();
+        calculator = new RPNCalculator(new ArrayBasedStack<>(String.class));
     }
 
     @Test
