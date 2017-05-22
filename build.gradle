@@ -19,6 +19,12 @@ dependencies {
             'org.assertj:assertj-core:3.6.2'
 }
 
+jar {
+    manifest {
+        attributes 'Main-Class': 'exercises.calculator.App'
+    }
+}
+
 buildscript {
     repositories {
         mavenLocal()
