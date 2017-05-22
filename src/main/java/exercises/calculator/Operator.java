@@ -1,6 +1,7 @@
 package exercises.calculator;
 
 public enum Operator {
+
     PLUS("+"),
     MINUS("-"),
     DIVIDER("/"),

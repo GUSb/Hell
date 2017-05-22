@@ -69,4 +69,12 @@ public class ClassicCalculatorTest {
         final Double actual = calculator.calculate("4 + 3 - 2 * 5 / 10");
         assertThat(actual).isEqualTo(expected);
     }
+
+    @Test
+    public void name() throws Exception {
+        final Double expected = 100d;
+        final Double actual = calculator.calculate("2 - 1 * 100");
+        System.out.println(actual);
+        assertThat(actual).isEqualTo(expected);
+    }
 }
