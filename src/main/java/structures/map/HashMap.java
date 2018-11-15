@@ -22,20 +22,32 @@ public class HashMap<K, V> {
         table = (Entry<K, V>[]) new Entry[DEFAULT_CAPACITY];
     }
 
-    public boolean put(K key, V value) {
-
-        if (value == null || contains(key)) {
-            return false;
-        }
+    public V put(K key, V value) {
 
         int hash = key.hashCode();
         int index = index(hash);
+        V oldValue = get(key);
 
         Entry<K, V> old = table[index];
-        table[index] = new Entry<>(key, value, key.hashCode(), old);
 
-        increment();
-        return true;
+        if (old == null) {
+
+            table[index] = new Entry<>(key, value, key.hashCode(), null);
+            increment();
+
+        } else {
+            Entry<K, V> copy = old;
+            while (copy != null) {
+
+                if (old.hash == key.hashCode() && old.key.equals(key)) {
+                    table[index] = new Entry<>(key, value, key.hashCode(), null);
+                }
+
+                copy = copy.next;
+            }
+        }
+
+        return oldValue;
     }
 
     public V get(K key) {
@@ -44,7 +56,7 @@ public class HashMap<K, V> {
         Entry<K, V> pair = table[index];
 
         while (pair != null) {
-            if (pair.key.hashCode() == hash && key.equals(pair.key)) {
+            if (pair.hash == hash && key.equals(pair.key)) {
                 return pair.value;
             } else {
                 pair = pair.next;

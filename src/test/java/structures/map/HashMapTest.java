@@ -1,10 +1,11 @@
 package structures.map;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
+@Ignore
 public class HashMapTest {
 
     private HashMap<String, Integer> map;
@@ -20,21 +21,27 @@ public class HashMapTest {
     }
 
     @Test
-    public void putReturnsFalseWhenInputValueIsNull() throws Exception {
-        boolean actual = map.put("One", null);
-        assertThat(actual).isFalse();
+    public void putReturnsNullWhenKeyValuePairCurrentlyNotExist() throws Exception {
+        Integer actual = map.put("Four", 4);
+        assertThat(actual).isNull();
     }
 
     @Test
-    public void putValueToMapReturnsTrue() throws Exception {
-        boolean actual = map.put("Four", 4);
-        assertThat(actual).isTrue();
+    public void putReturnsPreviouslyAssociatedValueIfMapContainsKey() throws Exception {
+        Integer actual = map.put("One", 11);
+        assertThat(actual).isEqualTo(1);
     }
 
     @Test
-    public void putKeyThatAlreadyExistsReturnsFalse() throws Exception {
-        boolean actual = map.put("One", 1);
-        assertThat(actual).isFalse();
+    public void putAlreadyExistedKeyOverridesValue() throws Exception {
+        map.put("One", 11);
+        assertThat(map.get("One")).isEqualTo(11);
+    }
+
+    @Test
+    public void putAlreadyExistedKeyDoNotIncrementSize() throws Exception {
+        map.put("One", 11);
+        assertThat(map.size()).isEqualTo(3);
     }
 
     @Test
