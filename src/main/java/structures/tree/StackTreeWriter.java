@@ -5,75 +5,75 @@ import java.util.Queue;
 
 public class StackTreeWriter implements TreeWriter {
 
-    private static final String SPLITTER = ",";
-    private static final String EMPTY = "NULL";
+  private static final String SPLITTER = ",";
+  private static final String EMPTY = "NULL";
 
-    @Override
-    public String serializeTree(TreeNode root) {
+  @Override
+  public String serializeTree(TreeNode root) {
 
-        if (root == null) {
-            return null;
-        }
-
-        StringBuilder sb = new StringBuilder();
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.add(root);
-        sb.append(root.data).append(SPLITTER);
-
-        while (!queue.isEmpty()) {
-            TreeNode curr = queue.remove();
-
-            if (curr.left == null && curr.right == null) {
-                continue;
-            }
-
-            if (curr.left == null) {
-                sb.append(EMPTY).append(SPLITTER);
-            } else {
-                sb.append(curr.left.data).append(SPLITTER);
-                queue.add(curr.left);
-            }
-
-            if (curr.right == null) {
-                sb.append(EMPTY).append(SPLITTER);
-            } else {
-                sb.append(curr.right.data).append(SPLITTER);
-                queue.add(curr.right);
-            }
-        }
-
-        return sb.toString();
+    if (root == null) {
+      return null;
     }
 
-    @Override
-    public TreeNode restoreTree(String str) {
-        if (str == null || str.isEmpty()) {
-            return null;
-        }
+    StringBuilder sb = new StringBuilder();
+    Queue<TreeNode> queue = new LinkedList<>();
+    queue.add(root);
+    sb.append(root.data).append(SPLITTER);
 
-        Queue<TreeNode> queue = new LinkedList<>();
-        String[] data = str.split(SPLITTER);
-        TreeNode root = new TreeNode(Integer.valueOf(data[0]), null, null);
-        queue.add(root);
+    while (!queue.isEmpty()) {
+      TreeNode curr = queue.remove();
 
-        for (int i = 1; i < data.length; i += 2) {
-            int currDataLeft = Integer.parseInt(data[i]);
-            int curDataRight = Integer.parseInt(data[i + 1]);
-            TreeNode currNode = queue.remove();
+      if (curr.left == null && curr.right == null) {
+        continue;
+      }
 
-            if (currDataLeft != 0) {
-                TreeNode left = new TreeNode(currDataLeft, null, null);
-                currNode.left = left;
-                queue.add(left);
-            }
+      if (curr.left == null) {
+        sb.append(EMPTY).append(SPLITTER);
+      } else {
+        sb.append(curr.left.data).append(SPLITTER);
+        queue.add(curr.left);
+      }
 
-            if (curDataRight != 0) {
-                TreeNode right = new TreeNode(curDataRight, null, null);
-                currNode.right = right;
-                queue.add(right);
-            }
-        }
-
-        return root;
+      if (curr.right == null) {
+        sb.append(EMPTY).append(SPLITTER);
+      } else {
+        sb.append(curr.right.data).append(SPLITTER);
+        queue.add(curr.right);
+      }
     }
+
+    return sb.toString();
+  }
+
+  @Override
+  public TreeNode restoreTree(String str) {
+    if (str == null || str.isEmpty()) {
+      return null;
+    }
+
+    Queue<TreeNode> queue = new LinkedList<>();
+    String[] data = str.split(SPLITTER);
+    TreeNode root = new TreeNode(Integer.valueOf(data[0]), null, null);
+    queue.add(root);
+
+    for (int i = 1; i < data.length; i += 2) {
+      int currDataLeft = Integer.parseInt(data[i]);
+      int curDataRight = Integer.parseInt(data[i + 1]);
+      TreeNode currNode = queue.remove();
+
+      if (currDataLeft != 0) {
+        TreeNode left = new TreeNode(currDataLeft, null, null);
+        currNode.left = left;
+        queue.add(left);
+      }
+
+      if (curDataRight != 0) {
+        TreeNode right = new TreeNode(curDataRight, null, null);
+        currNode.right = right;
+        queue.add(right);
+      }
+    }
+
+    return root;
+  }
 }

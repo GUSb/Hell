@@ -2,7 +2,7 @@ package structures.tree;
 
 public interface TreeWriter {
 
-    String serializeTree(TreeNode root);
+  String serializeTree(TreeNode root);
 
-    TreeNode restoreTree(String str);
+  TreeNode restoreTree(String str);
 }

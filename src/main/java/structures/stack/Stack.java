@@ -2,15 +2,15 @@ package structures.stack;
 
 public interface Stack<T> {
 
-    void push(T node);
+  void push(T node);
 
-    T pop();
+  T pop();
 
-    T peak();
+  T peak();
 
-    boolean isEmpty();
+  boolean isEmpty();
 
-    Stack<T> reverse();
+  Stack<T> reverse();
 
-    int size();
+  int size();
 }

@@ -2,25 +2,25 @@ package structures.list;
 
 public interface List<E> {
 
-    int size();
+  int size();
 
-    boolean isEmpty();
+  boolean isEmpty();
 
-    boolean contains(Object node);
+  boolean contains(Object node);
 
-    boolean add(E node);
+  boolean add(E node);
 
-    E remove(int index);
+  E remove(int index);
 
-    boolean remove(Object node);
+  boolean remove(Object node);
 
-    E get(int index);
+  E get(int index);
 
-    void clear();
+  void clear();
 
-    E set(int index, E node);
+  E set(int index, E node);
 
-    void add(int index, E node);
+  void add(int index, E node);
 
-    int indexOf(Object node);
+  int indexOf(Object node);
 }

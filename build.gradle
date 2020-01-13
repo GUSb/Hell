@@ -3,7 +3,6 @@ version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
 apply plugin: 'groovy'
-apply plugin: 'org.sonarqube'
 apply plugin: "info.solidsoft.pitest"
 apply plugin: 'jacoco'
 apply plugin: 'idea'
@@ -58,20 +57,6 @@ sourceSets {
 
 test {
     exclude '**/performance/**'
-}
-
-sonarqube {
-    properties {
-        property "sonar.host.url", sonarHostUrl
-        property "sonar.jdbc.url", sonarJdbcUrl
-        property "sonar.jdbc.driverClassName", driverClassName
-        property "sonar.jdbc.username", sonarJdbcUsername
-        property "sonar.jdbc.password", sonarJdbcPassword
-        property "sonar.login", sonarLogin
-        property "sonar.password", sonarPassword
-        property "sonar.pitest.reportsDirectory", pitestReportsDirectory
-        property "sonar.pitest.mode", pitestMode
-    }
 }
 
 pitest {

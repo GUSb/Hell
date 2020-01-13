@@ -1,26 +1,25 @@
 package structures.list;
 
 import org.junit.Test;
-import structures.list.Node;
 
 public class NodeTest {
 
-    @Test
-    public void testNode() {
-        Node first = new Node(3);
-        Node middle = new Node(5);
-        Node last = new Node(7);
+  @Test
+  public void testNode() {
+    Node first = new Node(3);
+    Node middle = new Node(5);
+    Node last = new Node(7);
 
-        first.setNext(middle);
-        middle.setNext(last);
+    first.setNext(middle);
+    middle.setNext(last);
 
-        printList(first);
+    printList(first);
+  }
+
+  private void printList(Node node) {
+    while (node != null) {
+      System.out.println(node.getValue());
+      node = node.getNext();
     }
-
-    private void printList(Node node) {
-        while(node != null) {
-            System.out.println(node.getValue());
-            node = node.getNext();
-        }
-    }
+  }
 }
